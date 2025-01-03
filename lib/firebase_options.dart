@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:panty_bill/globals.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -52,13 +53,17 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBTP7T2-YaLJI-Nf0xE3-M7ha4lzil7E8s',
-    appId: '1:772941210308:web:9f09595e89a2e5546f1f91',
-    messagingSenderId: '772941210308',
+  static FirebaseOptions web = FirebaseOptions(
+    apiKey: env['FIREBASE_API_KEY'] ??
+        (throw Exception('FIREBASE_API_KEY is not set')),
+    appId: env['FIREBASE_APP_ID'] ??
+        (throw Exception('FIREBASE_APP_ID is not set')),
+    messagingSenderId: env['FIREBASE_MESSAGING_SENDER_ID'] ??
+        (throw Exception('FIREBASE_MESSAGING_SENDER_ID is not set')),
     projectId: 'panty-bill',
     authDomain: 'panty-bill.firebaseapp.com',
     storageBucket: 'panty-bill.firebasestorage.app',
-    measurementId: 'G-KBE5XD9ZRP',
+    measurementId: env['FIREBASE_MEASUREMENT_ID'] ??
+        (throw Exception('FIREBASE_MEASUREMENT_ID is not set')),
   );
 }
