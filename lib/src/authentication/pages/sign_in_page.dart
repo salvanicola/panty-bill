@@ -15,6 +15,7 @@ class SignInPage extends StatelessWidget {
 
     return SignInScreen(
       providers: providers,
+      showAuthActionSwitch: false,
       actions: [
         ForgotPasswordAction(((context, email) {
           final uri = Uri(
