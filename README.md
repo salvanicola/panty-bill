@@ -1,16 +1,76 @@
 # panty_bill
 
-A new Flutter project.
+Panty Bill is a bill tracker for shared houses.
+It is mainly a playground for me to experiment some flutter features and firebase environment.
+It is web app published on firebase.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+The project can be locally launched with `flutter run`
 
-A few resources to get you started if this is your first Flutter project:
+## Run firebase emulators
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+````
+firebase emulators:start --only database
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Typesafe firestore
+
+The project uses Firestore ODM.
+
+### Generate an entity
+
+Replace the entity name (<entity>) with the actual name.
+
+```
+import 'package:json_annotation/json_annotation.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore_odm/cloud_firestore_odm.dart';
+
+// This file is generated after the modelling
+part '<entity>.g.dart';
+
+/// A custom JsonSerializable annotation that supports decoding objects such
+/// as Timestamps and DateTimes.
+/// This variable can be reused between different models
+const firestoreSerializable = JsonSerializable(
+  converters: firestoreJsonConverters,
+  // The following values could alternatively be set inside your `build.yaml`
+  explicitToJson: true,
+  createFieldMap: true,
+  createPerFieldToJson: true,
+);
+
+@Collection<Bill>('table name')
+@firestoreSerializable
+class <Entity> {
+  <Entity>({
+  // fields
+    required this.id,
+    // ...
+  });
+
+  factory <Entity>.fromJson(Map<String, Object?> json) => _$<Entity>FromJson(json);
+
+  // fields
+  @Id()
+  final String id;
+  // ...
+
+  Map<String, Object?> toJson() => _$<Entity>ToJson(this);
+}
+
+```
+
+### Code generation
+
+```
+dart run build_runner build --delete-conflicting-outputs
+```
+
+or
+
+```
+dart run build_runner watch --delete-conflicting-outputs
+```
+````
