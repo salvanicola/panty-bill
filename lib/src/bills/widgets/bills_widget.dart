@@ -36,7 +36,8 @@ class BillsWidget extends StatelessWidget {
                         itemBuilder: (context, index) {
                           var bill = documents[index].data;
                           return ListTile(
-                            title: Text(DateFormat.yMd().format(bill.date)),
+                            title: Text(
+                                '${bill.id} - ${DateFormat.yMd().format(bill.date)} - ${bill.type}'),
                           );
                         },
                       );
