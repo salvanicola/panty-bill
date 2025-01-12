@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:panty_bill/src/authentication/pages/sign_in_page.dart';
+import 'package:panty_bill/src/bills/screens/bill_create_screen.dart';
 import 'package:panty_bill/src/home/pages/home_page.dart';
 
 class AppRouter {
@@ -54,6 +55,10 @@ class AppRouter {
           ),
         ],
       ),
+      GoRoute(
+          path: '/bills/create',
+          name: 'create-bill',
+          builder: (context, state) => BillCreateScreen()),
     ],
   );
 // end of GoRouter configuration

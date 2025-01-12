@@ -19,6 +19,11 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: BillsWidget(),
       ),
+      floatingActionButton: IconButton(
+          onPressed: () {
+            context.push('/bills/create');
+          },
+          icon: Icon(Icons.add)),
     );
   }
 }
