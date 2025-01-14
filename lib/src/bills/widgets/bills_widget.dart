@@ -2,6 +2,7 @@ import 'package:cloud_firestore_odm/cloud_firestore_odm.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:panty_bill/src/bills/models/bill.dart';
+import 'package:panty_bill/src/bills/widgets/bill_card.dart';
 
 final billsRef = BillCollectionReference();
 
@@ -35,10 +36,7 @@ class BillsWidget extends StatelessWidget {
                         itemCount: documents.length,
                         itemBuilder: (context, index) {
                           var bill = documents[index].data;
-                          return ListTile(
-                            title: Text(
-                                '${bill.id} - ${DateFormat.yMd().format(bill.date)} - ${bill.type}'),
-                          );
+                          return BillCard(bill: bill);
                         },
                       );
                     })),
